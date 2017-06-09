@@ -34,5 +34,6 @@ forest.land <- melt(forest.land,
 forest.land$Year <- gsub("X", "", forest.land$Year)
 forest.land$Year <- as.integer(forest.land$Year)
 
-## -----------------------------------------------------------------------------
-## Analysing forest coverage
+## export tidy data
+
+write.csv(forest.land, "forest-coverage.csv", row.names = FALSE)
