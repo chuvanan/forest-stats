@@ -34,6 +34,21 @@ forest.land <- melt(forest.land,
 forest.land$Year <- gsub("X", "", forest.land$Year)
 forest.land$Year <- as.integer(forest.land$Year)
 
+## -----------------------------------------------------------------------------
+## Add metadata about income and region
+
+country.mtdt <- read.csv("Metadata_Country_API_AG.LND.FRST.ZS_DS2_en_csv_v2.csv",
+                         stringsAsFactors = FALSE)
+
+names(country.mtdt) <- gsub("\\.", "", names(country.mtdt))
+
+country.mtdt <- country.mtdt[, c("CountryCode", "Region", "IncomeGroup")]
+
+forest.land <- merge(forest.land,
+                     country.mtdt,
+                     by = "CountryCode",
+                     all.x = TRUE)
+
 ## export tidy data
 
 write.csv(forest.land, "forest-coverage.csv", row.names = FALSE)
