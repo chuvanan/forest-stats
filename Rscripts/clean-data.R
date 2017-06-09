@@ -34,6 +34,10 @@ forest.land <- melt(forest.land,
 forest.land$Year <- gsub("X", "", forest.land$Year)
 forest.land$Year <- as.integer(forest.land$Year)
 
+## remove unknow names
+
+forest.land <- forest.land[forest.land$CountryName != "Not classified", ]
+
 ## -----------------------------------------------------------------------------
 ## Add metadata about income and region
 
